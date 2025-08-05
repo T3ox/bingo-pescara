@@ -1,0 +1,24 @@
+.login-card {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 48.4px;
+  letter-spacing: 0.005em;
+  text-align: center;
+
+  h1 {
+    background-image: linear-gradient(
+      90deg,
+      #e84e9f,
+      #e84e9f 8%,
+      #38b0e8 30%,
+      #38b0e8 45%,
+      #e84e9f 60%,
+      #e84e9f
+    );
+    background-clip: text;
+    color: transparent;
+    border: unset;
+    font-weight: 700;
+    font-size: 2em;
+  }
+}

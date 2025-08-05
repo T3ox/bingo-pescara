@@ -1,0 +1,30 @@
+.show {
+  display: block !important;
+
+  .modal-dialog {
+    max-width: 90vw !important;
+    margin: auto;
+    overflow: hidden;
+    color: whitesmoke;
+
+    .modal-content {
+      border-radius: 1rem;
+
+      .modal-header {
+        border-bottom: 1px solid whitesmoke !important;
+        .btn-close {
+          filter: invert(1);
+        }
+      }
+
+      .modal-body {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+        padding: 20px;
+        overflow: scroll;
+        max-height: 80svh;
+      }
+    }
+  }
+}

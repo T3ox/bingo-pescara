@@ -1,0 +1,15 @@
+.login-container {
+  overflow: hidden;
+
+  .login-bg {
+    background-color: rgb(182, 219, 251);
+    object-fit: cover;
+    z-index: 0;
+    filter: blur(50%);
+  }
+
+  .login-card_container {
+    z-index: 1;
+    width: 75%;
+  }
+}
