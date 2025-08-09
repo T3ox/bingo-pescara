@@ -12,9 +12,6 @@
 
       .modal-header {
         border-bottom: 1px solid whitesmoke !important;
-        .btn-close {
-          filter: invert(1);
-        }
       }
 
       .modal-body {
@@ -23,7 +20,13 @@
         grid-gap: 20px;
         padding: 20px;
         overflow: scroll;
+        overflow-x: hidden;
         max-height: 80svh;
+
+        .pick:hover {
+          background-color: #e2e2e2;
+          cursor: pointer;
+        }
       }
     }
   }

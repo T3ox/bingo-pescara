@@ -28,18 +28,15 @@ const ChooseModal: React.FC<Props> = ({ showModal, handle }) => {
             <h5 className="modal-title" id="staticBackdropLabel">
               Cart
             </h5>
-            <Button
-              className="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-              title=""
-              handle={handle}
-            />
+            <Button className="btn btn-close" title="" handle={handle} />
           </div>
           <div className="modal-body">
             {data.map((p, index) => (
               <Pick data={p} key={index} />
             ))}
+          </div>
+          <div className="modal-footer">
+            <Button className="btn btn-primary" title="Conferma" handle={handle} />
           </div>
         </div>
       </div>

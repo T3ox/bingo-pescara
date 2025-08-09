@@ -9,6 +9,7 @@ const Pick: React.FC<Props> = ({ data }) => {
   const closeModal = () => {
     setShowModal(false);
   };
+  
   return (
     <>
       {data.value !== '' ? (

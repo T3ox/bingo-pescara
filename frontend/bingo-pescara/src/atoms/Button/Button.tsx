@@ -1,10 +1,13 @@
 import type Props from './types';
 
-const Button: React.FC<Props> = ({ className, title, handle }) => {
+const Button: React.FC<Props> = ({ className, title, handle, children }) => {
   return (
     <>
       <button className={className} onClick={handle}>
-        {title}
+        <div>
+          {title}
+          {children}
+        </div>
       </button>
     </>
   );
