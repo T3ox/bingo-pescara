@@ -1,40 +1,9 @@
-import { useEffect, useState } from 'react';
 import Pick from '../../molecues/Pick/Pick';
-import type { BingoEvent } from '../../utils/types';
+import { useUser } from '../../utils/context/User/UserContext';
 import './styles.scss';
 
 const UserPick = () => {
-  const [data, setdata] = useState<BingoEvent[]>([]);
-
-  useEffect(() => {
-    // API CALL POPOLATE?
-    setdata([
-      {
-        value: 'Qualuno si caga addosso',
-        rarity: 'UNCOMMON',
-      },
-      {
-        value: '',
-        rarity: 'COMMON',
-      },
-      {
-        value: '',
-        rarity: 'RARE',
-      },
-      {
-        value: '',
-        rarity: 'EPIC',
-      },
-      {
-        value: '',
-        rarity: 'LEGENDARY',
-      },
-      {
-        value: '',
-        rarity: '',
-      },
-    ]);
-  }, []);
+  const { choices } = useUser();
 
   return (
     <div className="user-pick-container">
@@ -43,8 +12,8 @@ const UserPick = () => {
       </div>
       <h2>Scheda eventi</h2>
       <div className="picks-container">
-        {data.map((p, index) => (
-          <Pick data={p} key={index} />
+        {choices.map((p) => (
+          <Pick data={p} key={p.index} />
         ))}
       </div>
     </div>
