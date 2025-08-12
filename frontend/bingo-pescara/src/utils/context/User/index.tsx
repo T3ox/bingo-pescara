@@ -37,18 +37,39 @@ export const UserProvider = ({ children }: Props) => {
       index: 6,
     },
   ]);
+  const [showModal, setShowModal] = useState(false);
+  const [clickedItem, setClickedItem] = useState(0);
 
-  const addChoice = useCallback((event: BingoEvent) => {
-    console.log(event);
+  const addChoice = useCallback(
+    (event: BingoEvent) => {
+      console.log(event);
+      setChoices((prevChoices) =>
+        prevChoices.map((choice) => (choice.index === clickedItem ? event : choice))
+      );
+      setShowModal(false);
+    },
+    [clickedItem]
+  );
+
+  const openModal = useCallback((id: number) => {
+    setClickedItem(id);
+    setShowModal(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setShowModal(false);
   }, []);
 
   const MemorizedValue = useMemo(() => {
     const value: UserContext = {
       choices,
       addChoice,
+      openModal,
+      closeModal,
+      showModal,
     };
     return value;
-  }, [addChoice, choices]);
+  }, [addChoice, choices, closeModal, openModal, showModal]);
 
   return <Context.Provider value={MemorizedValue}>{children}</Context.Provider>;
 };

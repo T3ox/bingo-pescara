@@ -1,16 +1,9 @@
-import { useState } from 'react';
-import ChooseModal from '../../organisms/ChooseModal/ChooseModal';
 import { useUser } from '../../utils/context/User/UserContext';
 import './styles.scss';
 import type Props from './types';
 
 const Pick: React.FC<Props> = ({ data }) => {
-  const [showModal, setShowModal] = useState(false);
-  const { addChoice } = useUser();
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
+  const { addChoice, closeModal, openModal } = useUser();
 
   return (
     <>
@@ -29,12 +22,10 @@ const Pick: React.FC<Props> = ({ data }) => {
       ) : (
         <div
           className="pick not-picked d-flex justify-content-center align-items-center"
-          onClick={() => setShowModal(true)}>
+          onClick={() => openModal(data.index)}>
           not picked
         </div>
       )}
-
-      {showModal ? <ChooseModal showModal={showModal} handle={closeModal} /> : null}
     </>
   );
 };

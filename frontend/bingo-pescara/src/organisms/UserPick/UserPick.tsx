@@ -1,9 +1,10 @@
 import Pick from '../../molecues/Pick/Pick';
 import { useUser } from '../../utils/context/User/UserContext';
+import ChooseModal from '../ChooseModal/ChooseModal';
 import './styles.scss';
 
 const UserPick = () => {
-  const { choices } = useUser();
+  const { choices, showModal, closeModal } = useUser();
 
   return (
     <div className="user-pick-container">
@@ -16,6 +17,7 @@ const UserPick = () => {
           <Pick data={p} key={p.index} />
         ))}
       </div>
+      {showModal ? <ChooseModal showModal={showModal} handle={closeModal} /> : null}
     </div>
   );
 };

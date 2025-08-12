@@ -17,11 +17,6 @@ export const events: BingoEvent[] = [
     index: 0,
   },
   {
-    value: 'Qualcuno fa sesso',
-    rarity: 'COMMON',
-    index: 0,
-  },
-  {
     value: 'Teo e Diana dormiranno assieme',
     rarity: 'LEGENDARY',
     index: 0,
@@ -29,11 +24,6 @@ export const events: BingoEvent[] = [
   {
     value: 'Maremoto',
     rarity: 'LEGENDARY',
-    index: 0,
-  },
-  {
-    value: 'Ci sarà una rivelazione sconvolgente',
-    rarity: 'EPIC',
     index: 0,
   },
   {
