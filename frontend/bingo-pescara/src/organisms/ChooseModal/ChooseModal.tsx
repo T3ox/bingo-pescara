@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../../atoms/Button/Button';
 import Pick from '../../molecues/Pick/Pick';
+import { useUser } from '../../utils/context/User/UserContext';
 import { events } from '../../utils/events';
 import type { BingoEvent } from '../../utils/types';
 import './styles.scss';
 import type Props from './types';
 
 const ChooseModal: React.FC<Props> = ({ showModal, handle }) => {
-  const [data, setdata] = useState<BingoEvent[]>([]);
+  const [data, setData] = useState<BingoEvent[]>([]);
+  const { choices } = useUser();
   useEffect(() => {
     // GET DEGLI EVENTI
-    setdata(events);
-  }, []);
+    setData(events.filter((event) => !choices.some((choice) => choice.value === event.value)));
+  }, [choices]);
 
   return (
     <div
