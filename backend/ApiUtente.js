@@ -69,3 +69,18 @@ app.get('/api/utenti/:id', async (req, res) => {
 app.listen(5173, () => {
     console.log("server avviato sulla porta 3000")
 })
+
+// api per prendere tutti gli utenti
+app.get('/api/users', async (req, res) => {
+    try {
+        const utenti = await db.collection('users').find({}).toArray();
+
+        if (!utenti || utenti.length === 0) {
+            return res.status(404).json({ error: "Nessun utente trovato" });
+        }
+
+        res.json(utenti);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
