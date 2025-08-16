@@ -21,7 +21,7 @@ const Leaderboard = () => {
     <div className="leaderboard">
       {users.map((user, index) => (
         <>
-          <LBUserRow name={user.username} choices={[]} pts={0} key={index} />
+          <LBUserRow name={user.username} choices={user.choices} key={index} />
         </>
       ))}
     </div>

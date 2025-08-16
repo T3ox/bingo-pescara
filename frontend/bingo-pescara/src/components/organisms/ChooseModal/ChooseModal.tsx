@@ -13,12 +13,12 @@ const ChooseModal: React.FC<Props> = ({ showModal, handle }) => {
 
   const rarityOrder = React.useMemo<Record<BingoEvent['rarity'], number>>(
     () => ({
-      COMMON: 1,
-      UNCOMMON: 2,
-      RARE: 3,
-      EPIC: 4,
-      LEGENDARY: 5,
-      MYTHIC: 6,
+      common: 1,
+      uncommon: 2,
+      rare: 3,
+      epic: 4,
+      legendary: 5,
+      mythic: 6,
     }),
     []
   );

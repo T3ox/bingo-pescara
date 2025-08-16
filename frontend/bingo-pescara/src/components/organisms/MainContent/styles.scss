@@ -27,11 +27,16 @@
     }
 
     .picks-container {
-      display: grid;
-      grid-gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
       padding-bottom: 35px;
-      grid-template-columns: repeat(2, 1fr);
       margin: 0 25px;
+
+      .pick {
+        width: 47%;
+      }
     }
   }
 }

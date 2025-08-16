@@ -9,6 +9,10 @@ import type Props from './types';
 const MainContent: React.FC<Props> = ({ title, type }) => {
   const { choices, showModal, closeModal } = useUser();
 
+  const lockChoices = () => {
+    console.log('choices', choices);
+  };
+
   return (
     <div className="main-content">
       <div className="user-pick-container">
@@ -25,7 +29,7 @@ const MainContent: React.FC<Props> = ({ title, type }) => {
               ))}
             </div>
             <div className="lock-choice m-2 ms-auto">
-              <Button className="btn btn-primary" title="Conferma scelta" />
+              <Button className="btn btn-primary" title="Conferma scelta" handle={lockChoices} />
             </div>
 
             {showModal && <ChooseModal showModal={showModal} handle={closeModal} />}
