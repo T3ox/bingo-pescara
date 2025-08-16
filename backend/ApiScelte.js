@@ -1,11 +1,18 @@
 import express, { json } from "express";
 import { MongoClient } from 'mongodb';
+import cors from 'cors';
 
 import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
 app.use(json());
+
+app.use(cors({
+  origin: "*", // indirizzo del frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 
 const client = new MongoClient(process.env.MONGODB_URI);
 
@@ -57,7 +64,7 @@ app.get('/api/events', async (req, res) => {
 })*/
 
 app.listen(3000, () => {
-    console.log("server avviato sulla porta 3000")
+    console.log("server avviato sulla porta 3000");
 })
 
 
