@@ -1,5 +1,7 @@
 import type { BingoEvent } from '../../../utils/types';
 
 export default interface Props {
-  data: BingoEvent;
+  name: string;
+  choices: BingoEvent[];
+  pts: number;
 }

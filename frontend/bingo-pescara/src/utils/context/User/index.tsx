@@ -10,31 +10,43 @@ export const UserProvider = ({ children }: Props) => {
       value: '',
       rarity: 'UNCOMMON',
       index: 1,
+      _id: '',
+      occured: false,
     },
     {
       value: '',
       rarity: 'COMMON',
       index: 2,
+      _id: '',
+      occured: false,
     },
     {
       value: '',
       rarity: 'RARE',
       index: 3,
+      _id: '',
+      occured: false,
     },
     {
       value: '',
       rarity: 'EPIC',
       index: 4,
+      _id: '',
+      occured: false,
     },
     {
       value: '',
       rarity: 'LEGENDARY',
       index: 5,
+      _id: '',
+      occured: false,
     },
     {
       value: '',
       rarity: '',
       index: 6,
+      _id: '',
+      occured: false,
     },
   ]);
   const [showModal, setShowModal] = useState(false);

@@ -1,12 +1,10 @@
-import UserPick from '../../organisms/UserPick/UserPick';
+import MainContent from '../../organisms/MainContent/MainContent';
 import './styles.scss';
 
 const BingoPage = () => {
   return (
     <div className="main-section d-flex justify-content-center align-items-center">
-      <div className="main-content">
-        <UserPick />
-      </div>
+      <MainContent title="IL TUO BINGO" type="bingo" />
     </div>
   );
 };
