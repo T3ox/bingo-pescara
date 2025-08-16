@@ -1,12 +1,13 @@
-const express = require("express");
-const {MongoClient} = require ('mongodb')
-const { ObjectId } = require("mongodb");
+import express, { json } from "express";
+import { MongoClient } from 'mongodb';
+import { ObjectId } from "mongodb";
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 
 const app = express();
-app.use(express.json());
+app.use(json());
 
 const client = new MongoClient(process.env.MONGODB_URI);
 
@@ -46,6 +47,7 @@ app.post('/api/utenti', async (req, res) =>{ // nelle '' inserire l'url su cui v
     res.status(500).json({ error: err.message });
 }
 }); 
+
 
 //api per prendere un singolo utente dal db
 app.get('/api/utenti/:id', async (req, res) => {
