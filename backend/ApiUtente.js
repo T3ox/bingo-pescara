@@ -1,6 +1,9 @@
 const express = require("express");
 const {MongoClient} = require ('mongodb')
+const { ObjectId } = require("mongodb");
+
 require('dotenv').config();
+
 
 const app = express();
 app.use(express.json());
@@ -47,9 +50,9 @@ app.post('/api/utenti', async (req, res) =>{ // nelle '' inserire l'url su cui v
 //api per prendere un singolo utente dal db
 app.get('/api/utenti/:id', async (req, res) => {
     try {
-        const { email } = req.params;
+        const { id } = req.params;
 
-        const utente = await collection.findOne({ email })
+        const utente = await collection.findOne({ _id: new ObjectId(id) })
 
         if (!utente) {
             return res.status(404).json({ error:"Utente non trovato"})
