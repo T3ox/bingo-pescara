@@ -63,12 +63,82 @@ export const events: BingoEvent[] = [
   },
   {
     value: 'Qualcuno si brucia in spiaggia',
-    rarity: 'RARE',
+    rarity: 'COMMON',
     index: 0,
   },
   {
     value: 'Dopo esserci accordati per un orario per trovarci, arriveremo in ritardo',
     rarity: 'UNCOMMON',
+    index: 0,
+  },
+  {
+    value: "Qualcuno si prende un'influenza/raffreddore",
+    rarity: 'RARE',
+    index: 0,
+  },
+  {
+    value: 'Il gruppo si divide',
+    rarity: 'COMMON',
+    index: 0,
+  },
+  {
+    value: 'Una perscarese pesca il nostro pesce',
+    rarity: 'RARE',
+    index: 0,
+  },
+  {
+    value: 'Qualcuno viene headshottato al softair',
+    rarity: 'UNCOMMON',
+    index: 0,
+  },
+  {
+    value: 'Uno del gruppo viene focussato la softair',
+    rarity: 'UNCOMMON',
+    index: 0,
+  },
+  {
+    value: "Grande vincita all'ippodromo",
+    rarity: 'LEGENDARY',
+    index: 0,
+  },
+  {
+    value: 'Qualcuno finisce nel post di Hatsune Miku Abruzzo',
+    rarity: 'RARE',
+    index: 0,
+  },
+  {
+    value: 'Fugna fugna con cosplayer di Hatsune Miku',
+    rarity: 'MYTHIC',
+    index: 0,
+  },
+  {
+    value: "Qualcuno si prende un'influenza/raffreddore",
+    rarity: 'RARE',
+    index: 0,
+  },
+  {
+    value: "Qualcuno si prende un'influenza/raffreddore",
+    rarity: 'RARE',
+    index: 0,
+  },
+  {
+    value: "Qualcuno si prende un'influenza/raffreddore",
+    rarity: 'RARE',
+    index: 0,
+  },
+  {
+    value: "Qualcuno si prende un'influenza/raffreddore",
+    rarity: 'RARE',
+    index: 0,
+  },
+  {
+    value: "Qualcuno si prende un'influenza/raffreddore",
+    rarity: 'RARE',
+    index: 0,
+  },
+  {
+    value: "Qualcuno si prende un'influenza/raffreddore",
+    rarity: 'RARE',
     index: 0,
   },
   {

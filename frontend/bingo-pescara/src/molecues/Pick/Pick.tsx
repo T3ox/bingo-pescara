@@ -9,12 +9,12 @@ const Pick: React.FC<Props> = ({ data }) => {
     <>
       {data.value !== '' ? (
         <div
-          className="pick picked"
+          className={`pick picked ${data.rarity.toLowerCase()}`}
           onClick={() => {
             addChoice(data);
             closeModal();
           }}>
-          <div className={`rarity-badge ${data.rarity}`}>{data.rarity}</div>
+          <div className={`rarity-badge`}>{data.rarity}</div>
           <div className="pick-label d-flex justify-content-center align-items-center">
             <span>{data.value}</span>
           </div>

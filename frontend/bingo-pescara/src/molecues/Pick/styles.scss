@@ -33,8 +33,53 @@
 
 .picked {
   border: 3px solid #2a2e7ea3;
+  color: white;
 }
 .not-picked {
   border: 3px dashed #2a2e7ea3;
   cursor: pointer;
+}
+
+.common {
+  background: linear-gradient(160.04deg, #98add6 -69.43%, #4f5769 132.63%);
+}
+
+.uncommon {
+  background: linear-gradient(160.04deg, #0ce470 -69.43%, #066a34 132.63%);
+}
+
+.rare {
+  background: linear-gradient(160.04deg, #5bbaff -69.43%, #004ba4 132.63%);
+}
+
+.epic {
+  background: linear-gradient(160.04deg, #ad5bff -69.43%, #371e6b 132.63%);
+}
+
+.legendary {
+  background: linear-gradient(160.04deg, #ffad32 -69.43%, #a86500 132.63%);
+}
+
+.mythic {
+  background: linear-gradient(
+    90deg,
+    #ff0040 0%,
+    #ff7a00 16%,
+    #ffd400 32%,
+    #22c55e 48%,
+    #06b6d4 64%,
+    #3b82f6 80%,
+    #8b5cf6 100%
+  );
+  background-size: 300% 100%;
+  animation: hue-shift 4s linear infinite;
+
+  @keyframes hue-shift {
+    from {
+      filter: hue-rotate(0deg);
+    }
+    to {
+      filter: hue-rotate(360deg);
+    }
+  }
 }

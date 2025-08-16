@@ -10,10 +10,28 @@ import type Props from './types';
 const ChooseModal: React.FC<Props> = ({ showModal, handle }) => {
   const [data, setData] = useState<BingoEvent[]>([]);
   const { choices } = useUser();
+
+  const rarityOrder = React.useMemo<Record<BingoEvent['rarity'], number>>(
+    () => ({
+      COMMON: 1,
+      UNCOMMON: 2,
+      RARE: 3,
+      EPIC: 4,
+      LEGENDARY: 5,
+      MYTHIC: 6,
+    }),
+    []
+  );
+
   useEffect(() => {
-    // GET DEGLI EVENTI
-    setData(events.filter((event) => !choices.some((choice) => choice.value === event.value)));
-  }, [choices]);
+    const filtered = events.filter(
+      (event) => !choices.some((choice) => choice.value === event.value)
+    );
+
+    const sorted = filtered.sort((a, b) => rarityOrder[a.rarity] - rarityOrder[b.rarity]);
+
+    setData(sorted);
+  }, [choices, rarityOrder]);
 
   return (
     <div
@@ -28,7 +46,7 @@ const ChooseModal: React.FC<Props> = ({ showModal, handle }) => {
         <div className="modal-content">
           <div className="modal-header border-bottom-0">
             <h5 className="modal-title" id="staticBackdropLabel">
-              Cart
+              Eventi
             </h5>
             <Button className="btn btn-close" title="" handle={handle} />
           </div>
@@ -38,7 +56,7 @@ const ChooseModal: React.FC<Props> = ({ showModal, handle }) => {
             ))}
           </div>
           <div className="modal-footer">
-            <Button className="btn btn-primary" title="Conferma" handle={handle} />
+            <Button className="btn btn-danger" title="Chiudi" handle={handle} />
           </div>
         </div>
       </div>
