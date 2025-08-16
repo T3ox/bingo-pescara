@@ -66,6 +66,6 @@ app.get('/api/utenti/:id', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
+app.listen(5173, () => {
     console.log("server avviato sulla porta 3000")
 })
