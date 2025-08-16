@@ -1,4 +1,4 @@
-const express = require("espress");
+const express = require("express");
 const {MongoClient} = require ('mongodb')
 require('dotenv').config();
 
@@ -6,19 +6,26 @@ const app = express();
 app.use(express.json());
 
 const client = new MongoClient(process.env.MONGODB_URI);
+
 let collection;
+let db;
 
 async function connectDB(){
-    await client.connect();
-    const db = client.db("BingoPescara");
-}
-connectDB:
-
-//API per il salvataggio dell'utente nel db
-app.post('', async (req, res) =>{ // nelle '' inserire l'url su cui viene fatta la funzione post
     try {
 
+        await client.connect();
+        db = client.db("BingoPescara");
         collection = db.collection("users")
+
+    } catch (err) {
+        console.error("errore di connessione al Db:", err);
+    }
+}
+connectDB();
+
+//API per il salvataggio dell'utente nel db
+app.post('/api/utenti', async (req, res) =>{ // nelle '' inserire l'url su cui viene fatta la funzione post
+    try {
 
         const { username, email } = req.body;
 
@@ -26,9 +33,9 @@ app.post('', async (req, res) =>{ // nelle '' inserire l'url su cui viene fatta 
             return res.status(400).json({ error: "inserire entrambi i campi per proseguire"})
         }
 
-    const result = await collection.insertOne({ username, email });
+        const result = await collection.insertOne({ username, email });
 
-    res.status(201).json({
+        res.status(201).json({
         message: "utente creato con successo",
         id: result.insertedId
     });
