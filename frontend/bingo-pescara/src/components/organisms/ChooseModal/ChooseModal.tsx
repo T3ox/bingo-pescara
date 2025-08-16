@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import getEvents from '../../../API/getEvents';
 import { useUser } from '../../../utils/context/User/UserContext';
-import type BingoEvent from '../../../utils/types';
+import type { BingoEvent } from '../../../utils/types';
 import Button from '../../atoms/Button/Button';
 import Pick from '../../molecues/Pick/Pick';
 import './styles.scss';

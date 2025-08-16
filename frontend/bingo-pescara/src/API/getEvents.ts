@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type BingoEvent from '../utils/types';
+import type { BingoEvent } from '../utils/types';
 
 const getEvents = async (): Promise<BingoEvent[]> => {
   try {
