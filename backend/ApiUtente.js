@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { json } from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
 
@@ -6,6 +7,14 @@ dotenv.config();
 
 const app = express();
 app.use(json());
+
+app.use(
+  cors({
+    origin: '*', // indirizzo del frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 const client = new MongoClient(process.env.MONGODB_URI);
 
