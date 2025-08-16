@@ -1,0 +1,38 @@
+.input-group {
+  position: relative;
+  width: 100%;
+  border-radius: 30px;
+  border: 1px solid #8d8d8d;
+
+  .input-field {
+    width: 90%;
+    background: transparent;
+  }
+
+  .btn {
+    width: 5%;
+  }
+
+  .input-field::placeholder {
+    color: #6e6e6e;
+    background: transparent;
+  }
+
+  .input-field:focus {
+    outline: none;
+  }
+
+  button {
+    position: relative;
+    right: 10px;
+  }
+
+  .clickable {
+    cursor: default !important;
+  }
+}
+
+.input-group:focus-within {
+  outline: none;
+  border: 1px solid #fcc24f !important;
+}
