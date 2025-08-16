@@ -38,12 +38,12 @@ export const events: BingoEvent[] = [
   },
   {
     value: 'Qualcuno si farà male',
-    rarity: 'RARE',
+    rarity: 'UNCOMMON',
     index: 0,
   },
   {
     value: "È l'ora dello sbusto",
-    rarity: 'UNCOMMON',
+    rarity: 'COMMON',
     index: 0,
   },
   {
@@ -112,37 +112,42 @@ export const events: BingoEvent[] = [
     index: 0,
   },
   {
-    value: "Qualcuno si prende un'influenza/raffreddore",
+    value: 'Incidente con la macchina',
+    rarity: 'EPIC',
+    index: 0,
+  },
+  {
+    value: 'La giornata va completamente liscia',
+    rarity: 'LEGENDARY',
+    index: 0,
+  },
+  {
+    value: 'Qualcuno rompe qualcosa',
+    rarity: 'EPIC',
+    index: 0,
+  },
+  {
+    value: "Qualcuno viene fermato delle forze dell'ordine",
     rarity: 'RARE',
     index: 0,
   },
   {
-    value: "Qualcuno si prende un'influenza/raffreddore",
+    value: 'Si spegne la macchina',
+    rarity: 'COMMON',
+    index: 0,
+  },
+  {
+    value: 'Tutti bevono e non ci saranno abbastanza guidatori',
     rarity: 'RARE',
     index: 0,
   },
   {
-    value: "Qualcuno si prende un'influenza/raffreddore",
-    rarity: 'RARE',
+    value: 'Mutande nel congelatore',
+    rarity: 'UNCOMMON',
     index: 0,
   },
   {
-    value: "Qualcuno si prende un'influenza/raffreddore",
-    rarity: 'RARE',
-    index: 0,
-  },
-  {
-    value: "Qualcuno si prende un'influenza/raffreddore",
-    rarity: 'RARE',
-    index: 0,
-  },
-  {
-    value: "Qualcuno si prende un'influenza/raffreddore",
-    rarity: 'RARE',
-    index: 0,
-  },
-  {
-    value: "Qualcuno si prende un'influenza/raffreddore",
+    value: "Problemi all'aereoporto",
     rarity: 'RARE',
     index: 0,
   },
