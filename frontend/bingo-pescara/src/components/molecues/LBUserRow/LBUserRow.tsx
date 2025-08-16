@@ -26,7 +26,7 @@ const LBUserRow: React.FC<Props> = ({ name, choices }) => {
       <div className="user-row d-flex justify-content-between align-items-center">
         <span>1</span>
         <span>{name}</span>
-        <div className="choices d-flex">
+        <div className="choices d-flex flex-row-reverse">
           {choices?.map((c, index) => <div className={`circle `} key={index}></div>)}
         </div>
 

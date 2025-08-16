@@ -10,7 +10,10 @@ const MainContent: React.FC<Props> = ({ title, type }) => {
   const { choices, showModal, closeModal } = useUser();
 
   const lockChoices = () => {
+    const choicesId: string[] = [];
+    choices.forEach((choice) => choicesId.push(choice._id));
     console.log('choices', choices);
+    console.log('choicesId', choicesId);
   };
 
   return (
