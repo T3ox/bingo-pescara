@@ -7,7 +7,7 @@ import Context from './UserContext';
 export const UserProvider = ({ children }: Props) => {
   const [choices, setChoices] = useState<BingoEvent[]>([
     {
-      value: 'Qualuno si caga addosso',
+      value: '',
       rarity: 'UNCOMMON',
       index: 1,
     },

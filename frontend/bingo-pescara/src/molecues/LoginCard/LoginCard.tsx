@@ -11,7 +11,7 @@ const LoginCard = () => {
         className="btn btn-primary"
         title="Esegui il Login"
         handle={() => {
-          navigate('/bingo');
+          navigate('/my-profile');
         }}></Button>
     </div>
   );

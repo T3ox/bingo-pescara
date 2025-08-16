@@ -1,0 +1,14 @@
+.left-panel {
+  width: 25%;
+  background-color: rgba(42, 46, 126, 0.2);
+  border-radius: 20px;
+  padding: 20px;
+
+  .d-flex {
+    gap: 20px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
