@@ -66,10 +66,6 @@ app.get('/api/utenti/:id', async (req, res) => {
     }
 });
 
-app.listen(5173, () => {
-    console.log("server avviato sulla porta 3000")
-})
-
 // api per prendere tutti gli utenti
 app.get('/api/users', async (req, res) => {
     try {
@@ -84,3 +80,31 @@ app.get('/api/users', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
+
+app.post('/api/users', async (req, res) => {
+    try {
+        const { username, email } = req.body;
+
+        if (!username && !email) {
+            return res.status(400).json({ error: "Serve almeno username o email" });
+        }
+
+        const userDoc = {
+            username: username || null,
+            email: email || null,
+        };
+
+        const result = await db.collection('users').insertOne(userDoc);
+
+        res.status(201).json({
+            message: "Utente salvato correttamente",
+            userId: result.insertedId
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.listen(5173, () => {
+    console.log("server avviato sulla porta 3000")
+})
