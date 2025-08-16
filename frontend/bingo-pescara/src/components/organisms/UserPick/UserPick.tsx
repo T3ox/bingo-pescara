@@ -1,5 +1,5 @@
+import { useUser } from '../../../utils/context/User/UserContext';
 import Pick from '../../molecues/Pick/Pick';
-import { useUser } from '../../utils/context/User/UserContext';
 import ChooseModal from '../ChooseModal/ChooseModal';
 import './styles.scss';
 

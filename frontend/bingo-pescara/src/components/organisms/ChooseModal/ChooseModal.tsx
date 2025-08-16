@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import getEvents from '../../../API/getEvents';
+import { useUser } from '../../../utils/context/User/UserContext';
+import type BingoEvent from '../../../utils/types';
 import Button from '../../atoms/Button/Button';
 import Pick from '../../molecues/Pick/Pick';
-import { useUser } from '../../utils/context/User/UserContext';
-import { events } from '../../utils/events';
-import type { BingoEvent } from '../../utils/types';
 import './styles.scss';
 import type Props from './types';
 
@@ -24,13 +24,20 @@ const ChooseModal: React.FC<Props> = ({ showModal, handle }) => {
   );
 
   useEffect(() => {
-    const filtered = events.filter(
-      (event) => !choices.some((choice) => choice.value === event.value)
-    );
+    const getData = async () => {
+      const data: BingoEvent[] = await getEvents();
+      console.log('i dati sono: ', data);
 
-    const sorted = filtered.sort((a, b) => rarityOrder[a.rarity] - rarityOrder[b.rarity]);
+      setData(data);
+      const filtered = data.filter(
+        (event) => !choices.some((choice) => choice.value === event.value)
+      );
 
-    setData(sorted);
+      const sorted = filtered.sort((a, b) => rarityOrder[a.rarity] - rarityOrder[b.rarity]);
+      setData(sorted);
+    };
+
+    getData();
   }, [choices, rarityOrder]);
 
   return (

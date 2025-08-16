@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import Button from '../../../atoms/Button/Button';
+import Button from '../../atoms/Button/Button';
 import './styles.scss';
 
 const LeftPanel = () => {

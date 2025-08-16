@@ -1,4 +1,4 @@
-import { useUser } from '../../utils/context/User/UserContext';
+import { useUser } from '../../../utils/context/User/UserContext';
 import './styles.scss';
 import type Props from './types';
 
