@@ -3,7 +3,7 @@ import type { BingoEvent } from '../utils/types';
 
 const getEvents = async (): Promise<BingoEvent[]> => {
   try {
-    const respose = await axios.get('http://localhost:3000/api/events');
+    const respose = await axios.get('http://localhost:3001/api/events');
     return respose.data;
   } catch (error) {
     console.error(error);

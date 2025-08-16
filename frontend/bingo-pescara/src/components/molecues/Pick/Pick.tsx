@@ -3,16 +3,20 @@ import './styles.scss';
 import type Props from './types';
 
 const Pick: React.FC<Props> = ({ data }) => {
-  const { addChoice, closeModal, openModal } = useUser();
+  const { addChoice, closeModal, openModal, showModal } = useUser();
 
   return (
     <>
       {data.value !== '' ? (
         <div
-          className={`pick picked ${data.rarity.toLowerCase()}`}
+          className={`pick picked ${data.rarity}`}
           onClick={() => {
-            addChoice(data);
-            closeModal();
+            if (showModal) {
+              addChoice(data);
+              closeModal();
+            } else {
+              openModal(data.index);
+            }
           }}>
           <div className={`rarity-badge`}>{data.rarity}</div>
           <div className="pick-label d-flex justify-content-center align-items-center">

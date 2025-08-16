@@ -1,7 +1,7 @@
 import './styles.scss';
 import type Props from './types';
 
-const LBUserRow: React.FC<Props> = ({ name, choices, pts }) => {
+const LBUserRow: React.FC<Props> = ({ name, choices }) => {
   const points = () => {
     const rarityPoints: Record<string, number> = {
       common: 1,
@@ -11,12 +11,12 @@ const LBUserRow: React.FC<Props> = ({ name, choices, pts }) => {
       legendary: 5,
     };
 
-    let total = 0;
-    choices.forEach((c) => {
+    const total = 0;
+    /*choices.forEach((c) => {
       if (c.occured) {
         total += rarityPoints[c.rarity.toLowerCase()] || 0;
       }
-    });
+    });*/
 
     return total;
   };
@@ -26,7 +26,10 @@ const LBUserRow: React.FC<Props> = ({ name, choices, pts }) => {
       <div className="user-row d-flex justify-content-between align-items-center">
         <span>1</span>
         <span>{name}</span>
-        <div className="choices"></div>
+        <div className="choices d-flex">
+          {choices?.map((c, index) => <div className={`circle `} key={index}></div>)}
+        </div>
+
         <span>{points()}</span>
       </div>
     </>

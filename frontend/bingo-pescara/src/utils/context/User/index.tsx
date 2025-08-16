@@ -48,6 +48,27 @@ export const UserProvider = ({ children }: Props) => {
       _id: '',
       occured: false,
     },
+    {
+      value: '',
+      rarity: '',
+      index: 7,
+      _id: '',
+      occured: false,
+    },
+    {
+      value: '',
+      rarity: '',
+      index: 8,
+      _id: '',
+      occured: false,
+    },
+    {
+      value: '',
+      rarity: '',
+      index: 9,
+      _id: '',
+      occured: false,
+    },
   ]);
   const [showModal, setShowModal] = useState(false);
   const [clickedItem, setClickedItem] = useState(0);
