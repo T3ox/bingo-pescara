@@ -104,17 +104,26 @@ export const UserProvider = ({ children }: Props) => {
       }
 
       try {
-        const response = await axios.post('http://localhost:3000/api/utenti', {
+        type RegisterResponse = User & { message?: string };
+
+        const response = await axios.post<RegisterResponse>('http://localhost:3000/api/utenti', {
           username,
           email,
-          // password, <-- se decidi di gestirla
+          // password,
         });
 
         if (response.data.message) {
           console.warn('Registrazione fallita:', response.data.message);
           return response.data.message;
         }
-        const userData = { username, email, _id: '', choices: [] };
+
+        const userData: User = {
+          _id: response.data._id ?? '',
+          username: response.data.username,
+          email: response.data.email,
+          choices: response.data.choices ?? [],
+        };
+
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
 
@@ -124,7 +133,7 @@ export const UserProvider = ({ children }: Props) => {
         return 'Errore di rete, riprova più tardi';
       }
     },
-    [navigate] // dipendenze
+    [navigate]
   );
 
   const MemorizedValue = useMemo(() => {
@@ -136,7 +145,7 @@ export const UserProvider = ({ children }: Props) => {
       showModal,
       doRegister,
       user,
-      setUser
+      setUser,
     };
     return value;
   }, [addChoice, choices, closeModal, doRegister, openModal, showModal, user]);
