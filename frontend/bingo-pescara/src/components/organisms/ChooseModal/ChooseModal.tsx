@@ -26,7 +26,6 @@ const ChooseModal: React.FC<Props> = ({ showModal, handle }) => {
   useEffect(() => {
     const getData = async () => {
       const data: BingoEvent[] = await getEvents();
-      console.log('i dati sono: ', data);
 
       setData(data);
       const filtered = data.filter(
