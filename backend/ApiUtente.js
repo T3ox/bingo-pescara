@@ -32,42 +32,22 @@ async function connectDB() {
 }
 connectDB();
 
-/*
-//API per il salvataggio dell'utente nel db
-app.post('/api/utenti', async (req, res) => {
-  try {
-    const { username, email } = req.body;
-
-    if (!username || !email) {
-      return res.status(400).json({ error: 'inserire entrambi i campi per proseguire' });
-    }
-
-
-    const result = await collection.insertOne({ username, email });
-
-    res.status(201).json({
-      message: 'utente creato con successo',
-      id: result.insertedId,
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-*/
-
 //API registrazione dell'utente nel db
 app.post('/api/utenti', async (req, res) => {
     try {
         const { username, email } = req.body;
 
-        if (!username && !email) {
-            return res.status(400).json({ error: "Serve almeno username o email" });
+        if (!username || !email) {
+            return res.status(400).json({ error: "Inserisci tutti i campi per registrarti" });
         }
+
+        const normalizedUsername = username.trim().toLowerCase();
+        const normalizedEmail = email.trim().toLowerCase();
 
         const existingUser = await db.collection('users').findOne({
             $or: [
-                { username: username },
-                { email: email }
+                { username: normalizedUsername },
+                { email: normalizedEmail }
             ]
         });
 
