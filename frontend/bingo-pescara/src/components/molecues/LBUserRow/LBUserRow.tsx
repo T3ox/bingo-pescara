@@ -3,13 +3,14 @@ import type Props from './types';
 
 const LBUserRow: React.FC<Props> = ({ name, choices }) => {
   const points = () => {
+    /* TODO
     const rarityPoints: Record<string, number> = {
       common: 1,
       uncommon: 2,
       rare: 3,
       epic: 4,
       legendary: 5,
-    };
+    };*/
 
     const total = 0;
     /*choices.forEach((c) => {
@@ -27,7 +28,7 @@ const LBUserRow: React.FC<Props> = ({ name, choices }) => {
         <span>1</span>
         <span>{name}</span>
         <div className="choices d-flex flex-row-reverse">
-          {choices?.map((c, index) => <div className={`circle `} key={index}></div>)}
+          {choices?.map((_, index) => <div className={`circle `} key={index}></div>)}
         </div>
 
         <span>{points()}</span>
