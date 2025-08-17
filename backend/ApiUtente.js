@@ -58,7 +58,7 @@ app.post('/api/utenti', async (req, res) => {
 //API registrazione dell'utente nel db
 app.post('/api/utenti', async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email } = req.body;
 
         if (!username && !email) {
             return res.status(400).json({ error: "Serve almeno username o email" });
