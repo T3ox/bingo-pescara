@@ -72,13 +72,12 @@ app.post('/api/utenti', async (req, res) => {
         });
 
         if (existingUser) {
-            return res.message("Account esistente con queste credenziali");
+            return res.json({message: "Account gia esistente con queste credenziali"});
         }
 
         const userDoc = {
             username: username || null,
             email: email || null,
-            password: password || null,
             choice: []
         };
 
@@ -99,11 +98,11 @@ app.listen(3000, () => {
 })
 
 //api per prendere un singolo utente dal db
-app.get('/api/utenti/:id', async (req, res) => {
+app.get('/api/utenti/:username', async (req, res) => {
   try {
-    const { id } = req.params;
+    const { username } = req.params;
 
-    const utente = await collection.findOne({ _id: new ObjectId(id) });
+    const utente = await collection.findOne({ username: username });
 
     if (!utente) {
       return res.status(404).json({ error: 'Utente non trovato' });
