@@ -6,37 +6,37 @@ const router = express.Router();
 
 //API registrazione dell'utente nel db
 router.post('/utenti', async (req, res) => {
-    try {
-        const db = req.app.locals.db;
-        const users = db.collection('users');
+  try {
+    const db = req.app.locals.db;
+    const users = db.collection('users');
 
-        const { username, email } = req.body;
+    const { username, email } = req.body;
 
-        const normalizedUsername = username.trim().toLowerCase();
-        const normalizedEmail = email.trim().toLowerCase();
+    const normalizedUsername = username.trim().toLowerCase();
+    const normalizedEmail = email.trim().toLowerCase();
 
-        const existingUser = await db.collection('users').findOne({
-            $or: [
-                { username: normalizedUsername },
-                { email: normalizedEmail }
-            ]
-        });
+    const existingUser = await db.collection('users').findOne({
+      $or: [
+        { username: normalizedUsername },
+        { email: normalizedEmail }
+      ]
+    });
 
-        if (existingUser) {
-            return res.json({message: "Account gia esistente con queste credenziali"});
-        }
-
-        await users.insertOne({ 
-          username: normalizedUsername, 
-          email: normalizedEmail, 
-          choices: []
-        });
-
-        res.sendStatus(201);
-
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    if (existingUser) {
+      return res.json({ message: "Account gia esistente con queste credenziali" });
     }
+
+    await users.insertOne({
+      username: normalizedUsername,
+      email: normalizedEmail,
+      choices: []
+    });
+
+    res.sendStatus(201);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 
@@ -92,14 +92,10 @@ router.post('/choices/:userId/save', async (req, res) => {
       { $set: { choices: choicesId } }
     );
 
-    if (result.matchedCount === 0) {
-      return res.status(404).json({ error: 'Utente non trovato' });
-    }
-
     res.json({ message: 'Scelte aggiornate con successo' });
   } catch (err) {
     console.error(err)
-    res.status(500).json({ error: err.message})
+    res.status(500).json({ error: err.message })
   }
 })
 
