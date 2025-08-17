@@ -1,10 +1,13 @@
+import axios from 'axios';
 import { useCallback, useMemo, useState } from 'react';
-import type { BingoEvent } from '../../types';
+import { useNavigate } from 'react-router-dom';
+import { type BingoEvent, type User } from '../../types';
 import type Props from '../types';
 import type UserContext from './types';
 import Context from './UserContext';
 
 export const UserProvider = ({ children }: Props) => {
+  const navigate = useNavigate();
   const [choices, setChoices] = useState<BingoEvent[]>([
     {
       value: '',
@@ -72,6 +75,7 @@ export const UserProvider = ({ children }: Props) => {
   ]);
   const [showModal, setShowModal] = useState(false);
   const [clickedItem, setClickedItem] = useState(0);
+  const [user, setUser] = useState<User>({ _id: '', email: '', username: '', choices: [] });
 
   const addChoice = useCallback(
     (event: BingoEvent) => {
@@ -93,6 +97,36 @@ export const UserProvider = ({ children }: Props) => {
     setShowModal(false);
   }, []);
 
+  const doRegister = useCallback(
+    async (username: string, email: string, password: string) => {
+      if (!username || !email || !password) {
+        return 'Il form non è completo';
+      }
+
+      try {
+        const response = await axios.post('http://localhost:3000/api/utenti', {
+          username,
+          email,
+          // password, <-- se decidi di gestirla
+        });
+
+        if (response.data.message) {
+          console.warn('Registrazione fallita:', response.data.message);
+          return response.data.message;
+        }
+        const userData = { username, email, _id: '', choices: [] };
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+
+        navigate('/my-profile');
+      } catch (error) {
+        console.warn('Errore di rete', error);
+        return 'Errore di rete, riprova più tardi';
+      }
+    },
+    [navigate] // dipendenze
+  );
+
   const MemorizedValue = useMemo(() => {
     const value: UserContext = {
       choices,
@@ -100,9 +134,12 @@ export const UserProvider = ({ children }: Props) => {
       openModal,
       closeModal,
       showModal,
+      doRegister,
+      user,
+      setUser
     };
     return value;
-  }, [addChoice, choices, closeModal, openModal, showModal]);
+  }, [addChoice, choices, closeModal, doRegister, openModal, showModal, user]);
 
   return <Context.Provider value={MemorizedValue}>{children}</Context.Provider>;
 };

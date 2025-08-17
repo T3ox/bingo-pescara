@@ -7,6 +7,15 @@ const Context = createContext<UserContextType>({
   showModal: false,
   openModal: () => {},
   closeModal: () => {},
+  doRegister: async (username: string, email: string, password: string): Promise<string> => {
+    return '';
+  },
+  user: {
+    _id: '',
+    username: '',
+    email: '',
+    choices: [],
+  },
 });
 
 export const useUser = (): UserContextType => useContext(Context);

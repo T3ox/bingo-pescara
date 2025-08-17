@@ -1,13 +1,12 @@
-import axios from 'axios';
 import { useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import lock from '../../../assets/lock.svg';
+import { useUser } from '../../../utils/context/User/UserContext';
 import Button from '../../atoms/Button/Button';
 import LoginInput from '../../atoms/LoginInput/LoginInput';
 import './styles.scss';
 
 const LoginModal = () => {
-  const navigate = useNavigate();
+  const { doRegister } = useUser();
   const [isRegisterd, setIsRegisterd] = useState(false);
   const [showError, setShowError] = useState('');
 
@@ -40,32 +39,6 @@ const LoginModal = () => {
   );
 
   const doLogin = async () => {};
-
-  const doRegister = async () => {
-    if (!loginForm.username || !loginForm.email || !loginForm.password) {
-      setShowError('Il form non è completo');
-      return;
-    }
-
-    try {
-      const response = await axios.post('http://localhost:3000/api/utenti', {
-        username: loginForm.username,
-        email: loginForm.email,
-        // password: loginForm.password  <-- se decidi di gestirla
-      });
-
-      if (response.data.message) {
-        console.warn('Registrazione fallita:', response.data.message);
-        setShowError(response.data.message);
-        return;
-      }
-
-      // vai alla pagina profilo
-      navigate('/my-profile');
-    } catch (error) {
-      console.warn('Errore di rete', error);
-    }
-  };
 
   return (
     <div className="container-fluid modal-container">
@@ -139,8 +112,17 @@ const LoginModal = () => {
                 <Button
                   title="Register"
                   className="btn rounded-pill button-form"
-                  handle={() => {
-                    doRegister();
+                  handle={async () => {
+                    const errorMessage = await doRegister(
+                      loginForm.username,
+                      loginForm.email,
+                      loginForm.password
+                    );
+                    if (errorMessage) {
+                      setShowError(errorMessage);
+                    } else {
+                      setShowError('');
+                    }
                   }}
                 />
                 {showError && <span style={{ color: 'red' }}>{showError}</span>}
