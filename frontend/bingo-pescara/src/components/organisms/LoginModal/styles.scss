@@ -15,13 +15,18 @@
     background-color: rgba(255, 255, 255, 0.9);
     -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
-  }
+    font-size: 16px !important;
+    padding: 48px 0;
 
-  .button-form {
-    width: 50%;
-    font-size: 20px;
-    margin-bottom: 40px;
-    color: white;
-    background: linear-gradient(157deg, rgb(141, 46, 226) 50%, rgb(91, 80, 208) 100%);
+    h1 {
+      padding-bottom: 48px;
+    }
+
+    .button-form {
+      width: 50%;
+      font-size: 20px;
+      color: white;
+      background: linear-gradient(157deg, rgb(141, 46, 226) 50%, rgb(91, 80, 208) 100%);
+    }
   }
 }

@@ -8,12 +8,13 @@ import './styles.scss';
 
 const LoginModal = () => {
   const navigate = useNavigate();
-
   const [isRegisterd, setIsRegisterd] = useState(false);
+  const [showError, setShowError] = useState('');
 
   const [loginForm, setLoginForm] = useState({
     username: '',
     email: '',
+    password: '',
   });
 
   const onChangeUsername = useCallback(
@@ -30,23 +31,22 @@ const LoginModal = () => {
     [loginForm]
   );
 
-  const doLogin = async () => {
-    try {
-      const response = await axios.post('http://localhost:3000/api/utenti', {
-        username: loginForm.username,
-        email: loginForm.email,
-      });
+  const onChangePassword = useCallback(
+    (password: string) => {
+      console.log('Kyoka Suigetsu');
+      setLoginForm({ ...loginForm, password });
+    },
+    [loginForm]
+  );
 
-      console.log('Utente creato:', response.data);
-
-      // vai alla pagina profilo
-      navigate('/my-profile');
-    } catch (error) {
-      console.warn('Errore di rete', error);
-    }
-  };
+  const doLogin = async () => {};
 
   const doRegister = async () => {
+    if (!loginForm.username || !loginForm.email || !loginForm.password) {
+      setShowError('Il form non è completo');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:3000/api/utenti', {
         username: loginForm.username,
@@ -54,7 +54,11 @@ const LoginModal = () => {
         // password: loginForm.password  <-- se decidi di gestirla
       });
 
-      console.log('Utente creato:', response.data);
+      if (response.data.message) {
+        console.warn('Registrazione fallita:', response.data.message);
+        setShowError(response.data.message);
+        return;
+      }
 
       // vai alla pagina profilo
       navigate('/my-profile');
@@ -74,7 +78,7 @@ const LoginModal = () => {
                 event.preventDefault();
                 //formLogin(loginForm.username, loginForm.password);
               }}>
-              <h1 className="text-center py-5">Ben tornato!</h1>
+              <h1 className="text-center">Ben tornato!</h1>
               <LoginInput
                 placeholder="Username"
                 isPassword={false}
@@ -94,10 +98,10 @@ const LoginModal = () => {
                 }}>
                 Non sei ancora registrato?
               </a>
-              <div className="row mb-4 justify-content-center">
+              <div className="row justify-content-center">
                 <Button
                   title="Login"
-                  className="btn rounded-pill button-form my-5"
+                  className="btn rounded-pill button-form"
                   handle={() => {
                     doLogin();
                   }}
@@ -111,7 +115,7 @@ const LoginModal = () => {
                 event.preventDefault();
                 //formLogin(loginForm.username, loginForm.password);
               }}>
-              <h1 className="text-center py-5">Benvenuto!</h1>
+              <h1 className="text-center">Benvenuto!</h1>
               <LoginInput
                 placeholder="Username"
                 isPassword={false}
@@ -121,9 +125,7 @@ const LoginModal = () => {
               <LoginInput
                 placeholder="Password"
                 isPassword={true}
-                onChangeText={() => {
-                  console.log('Kyoka Suigetsu');
-                }}
+                onChangeText={onChangePassword}
                 rightIcon={<img src={lock} alt="lock" />}
               />
               <a
@@ -133,7 +135,7 @@ const LoginModal = () => {
                 }}>
                 Sei già registrato?
               </a>
-              <div className="row m-4 justify-content-center">
+              <div className="row justify-content-center">
                 <Button
                   title="Register"
                   className="btn rounded-pill button-form"
@@ -141,6 +143,7 @@ const LoginModal = () => {
                     doRegister();
                   }}
                 />
+                {showError && <span style={{ color: 'red' }}>{showError}</span>}
               </div>
             </form>
           )}
