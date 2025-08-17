@@ -25,21 +25,14 @@ const ChooseModal: React.FC<Props> = ({ showModal, handle }) => {
 
   useEffect(() => {
     const getData = async () => {
-      let events: BingoEvent[] = [];
+      const data: BingoEvent[] = await getEvents();
 
-      const storedData = localStorage.getItem('events');
-
-      if (storedData) {
-        events = JSON.parse(storedData);
-      } else {
-        events = await getEvents();
-        localStorage.setItem('events', JSON.stringify(events));
-      }
-
-      const filtered = events.filter((event) => !choices.some((choice) => choice.value === event.value));
+      setData(data);
+      const filtered = data.filter(
+        (event) => !choices.some((choice) => choice.value === event.value)
+      );
 
       const sorted = filtered.sort((a, b) => rarityOrder[a.rarity] - rarityOrder[b.rarity]);
-
       setData(sorted);
     };
 
