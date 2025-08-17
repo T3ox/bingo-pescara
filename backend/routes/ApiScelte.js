@@ -1,5 +1,5 @@
 import express from 'express';
-
+import { ObjectId } from 'mongodb';
 
 const router = express.Router();
 
@@ -12,6 +12,28 @@ router.get('/events', async (req, res) => {
 
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+
+router.get('/event/:username', async (req, res) =>  {
+  try {
+    const db = req.app.locals.db;
+    const user = await db.collection("users").findOne({ username: req.params.username })
+
+    const choices = user.choices;
+
+    const events = await Promise.all(
+      choices.map(async (id) => {
+        return await db.collection("choices").findOne({ _id: new ObjectId(id) });    
+      })
+    );
+
+    res.json({ events });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Errore del server" + err });
   }
 });
 

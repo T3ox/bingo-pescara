@@ -82,9 +82,6 @@ router.post('/choices/:userId/save', async (req, res) => {
       return res.status(400).json({ error: 'Array choicesId mancante o non valido' });
     }
 
-    if (choicesId.length > 6) {
-      return res.status(400).json({ error: 'Array con troppi elementi' });
-    }
 
     if (!ObjectId.isValid(userId)) {
       return res.status(400).json({ error: 'ID utente non valido' });

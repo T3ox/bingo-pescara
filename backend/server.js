@@ -21,7 +21,7 @@ app.use(
   })
 );
 
-// Logger
+// Logger si può cancellare se si vuole
 app.use((req, res, next) => {
   console.log(`[${req.method}] ${req.originalUrl}`);
   next();
