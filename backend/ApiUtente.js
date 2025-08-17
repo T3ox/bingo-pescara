@@ -37,9 +37,6 @@ app.post('/api/utenti', async (req, res) => {
     try {
         const { username, email } = req.body;
 
-        if (!username || !email) {
-            return res.status(400).json({ error: "Inserisci tutti i campi per registrarti" });
-        }
 
         const normalizedUsername = username.trim().toLowerCase();
         const normalizedEmail = email.trim().toLowerCase();
@@ -61,12 +58,9 @@ app.post('/api/utenti', async (req, res) => {
             choice: []
         };
 
-        const result = await db.collection('users').insertOne(userDoc);
+        await db.collection('users').insertOne(userDoc);
 
-        res.status(201).json({
-            message: "Utente salvato correttamente",
-            userId: result.insertedId
-        });
+        res.sendStatus(201);
 
     } catch (err) {
         res.status(500).json({ error: err.message });

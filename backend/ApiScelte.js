@@ -47,7 +47,9 @@ app.get('/api/events', async (req, res) => {
   }
 });
 
-/*app.post("/api/events", async (req, res) => {
+
+/*
+app.post("/api/events", async (req, res) => {
     try {
         const events = req.body;
 
