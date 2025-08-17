@@ -14,7 +14,6 @@ const LoginModal = () => {
   const [loginForm, setLoginForm] = useState({
     username: '',
     email: '',
-    password: 'ScemoChiLegge',
   });
 
   const onChangeUsername = useCallback(
@@ -36,7 +35,6 @@ const LoginModal = () => {
       const response = await axios.post('http://localhost:3000/api/utenti', {
         username: loginForm.username,
         email: loginForm.email,
-        password: loginForm.password,
       });
 
       console.log('Utente creato:', response.data);
