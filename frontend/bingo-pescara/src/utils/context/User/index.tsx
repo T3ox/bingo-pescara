@@ -102,7 +102,6 @@ export const UserProvider = ({ children }: Props) => {
       if (!username || !password) {
         return 'Il form non è completo';
       }
-
       const response = await getUserById(username);
 
       const userData: User = {
@@ -140,11 +139,14 @@ export const UserProvider = ({ children }: Props) => {
           return response.data.message;
         }
 
+        const registerdUser = await getUserById(username);
+        console.log('registerdUser', registerdUser);
+
         const userData: User = {
-          _id: response.data._id ?? '',
-          username: response.data.username,
-          email: response.data.email,
-          choices: response.data.choices ?? [],
+          _id: registerdUser._id,
+          username: registerdUser.username,
+          email: registerdUser.email,
+          choices: registerdUser.choices,
         };
 
         setUser(userData);
@@ -162,6 +164,7 @@ export const UserProvider = ({ children }: Props) => {
   const MemorizedValue = useMemo(() => {
     const value: UserContext = {
       choices,
+      setChoices,
       addChoice,
       openModal,
       closeModal,

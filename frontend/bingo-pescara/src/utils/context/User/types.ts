@@ -2,6 +2,7 @@ import type { BingoEvent, User } from '../../types';
 
 export default interface UserContext {
   choices: BingoEvent[];
+  setChoices: React.Dispatch<React.SetStateAction<BingoEvent[]>>;
   addChoice: (event: BingoEvent) => void;
   showModal: boolean;
   openModal: (id: number) => void;

@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useEffect } from 'react';
-import getUserById from '../../../API/getUserById';
 import { useUser } from '../../../utils/context/User/UserContext';
 import Button from '../../atoms/Button/Button';
 import Pick from '../../molecues/Pick/Pick';
@@ -12,14 +10,14 @@ import type Props from './types';
 const MainContent: React.FC<Props> = ({ title, type }) => {
   const { choices, showModal, closeModal, user, setUser } = useUser();
 
-  useEffect(() => {
-    if (!user.username) {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
-    }
-  }, [setUser, user.username]);
+  // useEffect(() => {
+  //   if (!user.username) {
+  //     const storedUser = localStorage.getItem('user');
+  //     if (storedUser) {
+  //       setUser(JSON.parse(storedUser));
+  //     }
+  //   }
+  // }, [setUser, user.username]);
 
   const lockChoices = async () => {
     const choicesId: string[] = [];
@@ -27,15 +25,9 @@ const MainContent: React.FC<Props> = ({ title, type }) => {
 
     try {
       const userId = user._id; //user id di prova di uno user presente nel db
-      const response = await axios.post(`http://192.168.1.175:3000/api/choices/${userId}/save`, {
+      await axios.post(`http://192.168.1.175:3000/api/choices/${userId}/save`, {
         choicesId,
       });
-
-      const userUpdated = await getUserById(user._id);
-
-      console.log('userUpdated', userUpdated);
-
-      console.log('Utente aggiornato:', response.data);
     } catch (error) {
       console.error("Errore nell'aggiornamento:", error);
     }
