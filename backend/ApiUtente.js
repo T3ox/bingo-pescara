@@ -69,9 +69,6 @@ app.get('/api/utenti/:id', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('server avviato sulla porta 3000');
-});
 
 // api per prendere tutti gli utenti
 app.get('/api/users', async (req, res) => {
@@ -86,4 +83,37 @@ app.get('/api/users', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+
+app.post('/api/choices/:userId/save', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { choicesId } = req.body;
+
+    if (!choicesId || !Array.isArray(choicesId)) {
+      return res.status(400).json({ error: 'Array choicesId mancante o non valido' });
+    }
+
+    if (choicesId.length > 6) {
+      return res.status(400).json({ error: 'Array con troppi elementi' });
+    }
+
+    const result = await collection.updateOne(
+      { _id: new ObjectId(userId) },
+      { $set: { choices: choicesId } } // usa $push + $each se vuoi aggiungere senza sovrascrivere
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: 'Utente non trovato' });
+    }
+
+    res.json({ message: 'Scelte aggiornate con successo' });
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: err.message})
+  }
+})
+
+app.listen(3000, () => {
+  console.log('server avviato sulla porta 3000');
 });
