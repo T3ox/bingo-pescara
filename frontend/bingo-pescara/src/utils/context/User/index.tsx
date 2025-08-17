@@ -128,7 +128,7 @@ export const UserProvider = ({ children }: Props) => {
       try {
         type RegisterResponse = User & { message?: string };
 
-        const response = await axios.post<RegisterResponse>('http://localhost:3000/api/utenti', {
+        const response = await axios.post<RegisterResponse>('https://bingo-pescara.onrender.com/api/utenti', {
           username,
           email,
           // password,

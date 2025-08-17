@@ -8,16 +8,7 @@ import './styles.scss';
 import type Props from './types';
 
 const MainContent: React.FC<Props> = ({ title, type }) => {
-  const { choices, showModal, closeModal, user, setUser } = useUser();
-
-  // useEffect(() => {
-  //   if (!user.username) {
-  //     const storedUser = localStorage.getItem('user');
-  //     if (storedUser) {
-  //       setUser(JSON.parse(storedUser));
-  //     }
-  //   }
-  // }, [setUser, user.username]);
+  const { choices, showModal, closeModal, user } = useUser();
 
   const lockChoices = async () => {
     const choicesId: string[] = [];
