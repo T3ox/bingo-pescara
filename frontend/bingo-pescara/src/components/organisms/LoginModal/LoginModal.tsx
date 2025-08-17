@@ -6,7 +6,7 @@ import LoginInput from '../../atoms/LoginInput/LoginInput';
 import './styles.scss';
 
 const LoginModal = () => {
-  const { doRegister } = useUser();
+  const { doRegister, doLogin } = useUser();
   const [isRegisterd, setIsRegisterd] = useState(false);
   const [showError, setShowError] = useState('');
 
@@ -38,8 +38,6 @@ const LoginModal = () => {
     [loginForm]
   );
 
-  const doLogin = async () => {};
-
   return (
     <div className="container-fluid modal-container">
       <div className="row vh-100 align-content-center justify-content-center">
@@ -52,17 +50,11 @@ const LoginModal = () => {
                 //formLogin(loginForm.username, loginForm.password);
               }}>
               <h1 className="text-center">Ben tornato!</h1>
-              <LoginInput
-                placeholder="Username"
-                isPassword={false}
-                onChangeText={onChangeUsername}
-              />
+              <LoginInput placeholder="Username" isPassword={false} onChangeText={onChangeUsername} />
               <LoginInput
                 placeholder="Password"
                 isPassword={true}
-                onChangeText={() => {
-                  console.log('Kyoka Suigetsu');
-                }}
+                onChangeText={onChangePassword}
                 rightIcon={<img src={lock} alt="lock" />}
               />
               <a
@@ -75,10 +67,19 @@ const LoginModal = () => {
                 <Button
                   title="Login"
                   className="btn rounded-pill button-form"
-                  handle={() => {
-                    doLogin();
+                  handle={async () => {
+                    console.log('godo 1');
+                    console.log(loginForm.username, loginForm.password);
+
+                    const errorMessage = await doLogin(loginForm.username, loginForm.password);
+                    if (errorMessage) {
+                      setShowError(errorMessage);
+                    } else {
+                      setShowError('');
+                    }
                   }}
                 />
+                {showError && <span style={{ color: 'red' }}>{showError}</span>}
               </div>
             </form>
           ) : (
@@ -89,11 +90,7 @@ const LoginModal = () => {
                 //formLogin(loginForm.username, loginForm.password);
               }}>
               <h1 className="text-center">Benvenuto!</h1>
-              <LoginInput
-                placeholder="Username"
-                isPassword={false}
-                onChangeText={onChangeUsername}
-              />
+              <LoginInput placeholder="Username" isPassword={false} onChangeText={onChangeUsername} />
               <LoginInput placeholder="Email" isPassword={false} onChangeText={onChangeEmail} />
               <LoginInput
                 placeholder="Password"

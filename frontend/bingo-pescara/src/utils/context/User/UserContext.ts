@@ -7,6 +7,9 @@ const Context = createContext<UserContextType>({
   showModal: false,
   openModal: () => {},
   closeModal: () => {},
+  doLogin: async (username: string, password: string): Promise<string> => {
+    return `${username}, ${password}`;
+  },
   doRegister: async (username: string, email: string, password: string): Promise<string> => {
     return `${username}, ${email}, ${password}`;
   },

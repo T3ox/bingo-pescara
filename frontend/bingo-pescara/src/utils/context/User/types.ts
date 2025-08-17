@@ -6,6 +6,7 @@ export default interface UserContext {
   showModal: boolean;
   openModal: (id: number) => void;
   closeModal: () => void;
+  doLogin: (username: string, password: string) => Promise<string | undefined>;
   doRegister: (username: string, email: string, password: string) => Promise<string | undefined>;
   user: User;
   setUser: React.Dispatch<React.SetStateAction<User>>;

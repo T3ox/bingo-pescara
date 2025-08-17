@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import getUserById from '../../../API/getUserById';
 import { type BingoEvent, type User } from '../../types';
 import type Props from '../types';
 import type UserContext from './types';
@@ -97,6 +98,23 @@ export const UserProvider = ({ children }: Props) => {
     setShowModal(false);
   }, []);
 
+  const doLogin = useCallback(
+    async (username: string, password: string) => {
+      console.log('godo 2');
+      if (!username || !password) {
+        return 'Il form non è completo';
+      }
+
+      console.log('params', username, password);
+
+      const response = await getUserById(username);
+
+      console.log(response);
+      navigate('/my-profile');
+    },
+    [navigate]
+  );
+
   const doRegister = useCallback(
     async (username: string, email: string, password: string) => {
       if (!username || !email || !password) {
@@ -143,12 +161,13 @@ export const UserProvider = ({ children }: Props) => {
       openModal,
       closeModal,
       showModal,
+      doLogin,
       doRegister,
       user,
       setUser,
     };
     return value;
-  }, [addChoice, choices, closeModal, doRegister, openModal, showModal, user]);
+  }, [addChoice, choices, closeModal, doLogin, doRegister, openModal, showModal, user]);
 
   return <Context.Provider value={MemorizedValue}>{children}</Context.Provider>;
 };

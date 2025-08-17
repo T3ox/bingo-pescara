@@ -36,19 +36,21 @@ const MainContent: React.FC<Props> = ({ title, type }) => {
         </div>
 
         {type === 'bingo' ? (
-          <div className="inside">
+          <>
             <h2>Scheda eventi</h2>
-            <div className="picks-container">
-              {choices.map((p) => (
-                <Pick data={p} key={p.index} />
-              ))}
-            </div>
-            <div className="lock-choice m-2 ms-auto">
-              <Button className="btn btn-primary" title="Conferma scelta" handle={lockChoices} />
+            <div className="scroll-content" style={{ overflowY: 'scroll' }}>
+              <div className="picks-container">
+                {choices.map((p) => (
+                  <Pick data={p} key={p.index} />
+                ))}
+              </div>
+              <div className="lock-choice m-2 ms-auto">
+                <Button className="btn btn-primary" title="Conferma scelta" handle={lockChoices} />
+              </div>
             </div>
 
             {showModal && <ChooseModal showModal={showModal} handle={closeModal} />}
-          </div>
+          </>
         ) : (
           <Leaderboard />
         )}
