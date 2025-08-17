@@ -3,12 +3,12 @@ import type { User } from '../utils/types';
 
 const getEvents = async (): Promise<User[]> => {
   try {
-    const respose = await axios.get('http://localhost:3000/api/users');
-    return respose.data;
+    const response = await axios.get<User[]>('http://localhost:3000/api/users');
+    return response.data;
   } catch (error) {
     console.error(error);
+    return [];
   }
-  return [];
 };
 
 export default getEvents;
