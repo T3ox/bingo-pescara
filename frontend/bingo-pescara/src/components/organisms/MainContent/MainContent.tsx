@@ -6,15 +6,28 @@ import Leaderboard from '../Leaderboard/Leaderboard';
 import './styles.scss';
 import type Props from './types';
 
-const MainContent: React.FC<Props> = ({ title, type }) => {
-  const { choices, showModal, closeModal } = useUser();
+import axios from 'axios';
 
-  const lockChoices = () => {
-    const choicesId: string[] = [];
-    choices.forEach((choice) => choicesId.push(choice._id));
-    console.log('choices', choices);
-    console.log('choicesId', choicesId);
-  };
+  const MainContent: React.FC<Props> = ({ title, type }) => {
+    const { choices, showModal, closeModal } = useUser();
+
+    const lockChoices = async () => {
+      const choicesId: string[] = [];
+      choices.forEach((choice) => choicesId.push(choice._id));
+      console.log('choices', choices);
+      console.log('choicesId', choicesId);
+
+      try {
+        const userId = "68a10911b981bde64c64efde" //user id di prova di uno user presente nel db
+        const response = await axios.post(`http://localhost:3000/api/choice/${userId}/save`, {
+          choicesId,
+        });
+
+        console.log("Utente aggiornato:", response.data);
+      } catch(error) {
+        console.error("Errore nell'aggiornamento:", error);
+      }
+    };
 
   return (
     <div className="main-content">

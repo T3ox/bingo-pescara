@@ -32,15 +32,16 @@ async function connectDB() {
 }
 connectDB();
 
+/*
 //API per il salvataggio dell'utente nel db
 app.post('/api/utenti', async (req, res) => {
-  // nelle '' inserire l'url su cui viene fatta la funzione post
   try {
     const { username, email } = req.body;
 
     if (!username || !email) {
       return res.status(400).json({ error: 'inserire entrambi i campi per proseguire' });
     }
+
 
     const result = await collection.insertOne({ username, email });
 
@@ -52,6 +53,50 @@ app.post('/api/utenti', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+*/
+
+//API registrazione dell'utente nel db
+app.post('/api/utenti', async (req, res) => {
+    try {
+        const { username, email, password } = req.body;
+
+        if (!username && !email) {
+            return res.status(400).json({ error: "Serve almeno username o email" });
+        }
+
+        const existingUser = await db.collection('users').findOne({
+            $or: [
+                { username: username },
+                { email: email }
+            ]
+        });
+
+        if (existingUser) {
+            return res.message("Account esistente con queste credenziali");
+        }
+
+        const userDoc = {
+            username: username || null,
+            email: email || null,
+            password: password || null,
+            choice: []
+        };
+
+        const result = await db.collection('users').insertOne(userDoc);
+
+        res.status(201).json({
+            message: "Utente salvato correttamente",
+            userId: result.insertedId
+        });
+
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.listen(3000, () => {
+    console.log("server avviato sulla porta 3000")
+})
 
 //api per prendere un singolo utente dal db
 app.get('/api/utenti/:id', async (req, res) => {
@@ -85,6 +130,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
+//api salvataggio scelte 
 app.post('/api/choices/:userId/save', async (req, res) => {
   try {
     const { userId } = req.params;
