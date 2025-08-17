@@ -80,7 +80,6 @@ export const UserProvider = ({ children }: Props) => {
 
   const addChoice = useCallback(
     (event: BingoEvent) => {
-      console.log(event);
       setChoices((prevChoices) =>
         prevChoices.map((choice) => (choice.index === clickedItem ? event : choice))
       );
@@ -100,16 +99,22 @@ export const UserProvider = ({ children }: Props) => {
 
   const doLogin = useCallback(
     async (username: string, password: string) => {
-      console.log('godo 2');
       if (!username || !password) {
         return 'Il form non è completo';
       }
 
-      console.log('params', username, password);
-
       const response = await getUserById(username);
 
-      console.log(response);
+      const userData: User = {
+        _id: response._id ?? '',
+        username: response.username,
+        email: response.email,
+        choices: response.choices ?? [],
+      };
+
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+
       navigate('/my-profile');
     },
     [navigate]

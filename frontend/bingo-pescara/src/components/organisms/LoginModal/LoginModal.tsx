@@ -68,9 +68,6 @@ const LoginModal = () => {
                   title="Login"
                   className="btn rounded-pill button-form"
                   handle={async () => {
-                    console.log('godo 1');
-                    console.log(loginForm.username, loginForm.password);
-
                     const errorMessage = await doLogin(loginForm.username, loginForm.password);
                     if (errorMessage) {
                       setShowError(errorMessage);

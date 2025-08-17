@@ -10,7 +10,6 @@ const Leaderboard = () => {
   useEffect(() => {
     const getData = async () => {
       const data: User[] = await getUsers();
-      console.log('i dati sono: ', data);
       setUsers(data);
     };
 
