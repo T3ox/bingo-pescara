@@ -16,7 +16,7 @@ const MainContent: React.FC<Props> = ({ title, type }) => {
 
     try {
       const userId = user._id; //user id di prova di uno user presente nel db
-      await axios.post(`http://192.168.1.175:3000/api/choices/${userId}/save`, {
+      await axios.post(`https://bingo-pescara.onrender.com/api/choices/${userId}/save`, {
         choicesId,
       });
     } catch (error) {
