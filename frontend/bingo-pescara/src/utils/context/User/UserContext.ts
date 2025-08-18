@@ -20,6 +20,7 @@ const Context = createContext<UserContextType>({
     choices: [],
   },
   setUser: () => {},
+  setChoices: () => {},
 });
 
 export const useUser = (): UserContextType => useContext(Context);
