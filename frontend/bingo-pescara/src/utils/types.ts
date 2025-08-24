@@ -12,3 +12,10 @@ export interface User {
   email: string;
   choices: string[];
 }
+
+export interface MockUser {
+  _id: string;
+  username: string;
+  email: string;
+  choices: BingoEvent[];
+}

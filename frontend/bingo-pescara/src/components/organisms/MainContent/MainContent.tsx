@@ -34,7 +34,7 @@ const MainContent: React.FC<Props> = ({ title, type }) => {
         {type === 'bingo' ? (
           <>
             <h2>Scheda eventi</h2>
-            <div className="scroll-content" style={{ overflowY: 'scroll' }}>
+            <div className="scroll-content">
               <div className="picks-container">
                 {choices.map((p) => (
                   <Pick data={p} key={p.index} />
