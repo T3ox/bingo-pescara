@@ -9,7 +9,7 @@ const Pick: React.FC<Props> = ({ data }) => {
     <>
       {data.value !== '' ? (
         <div
-          className={`pick picked ${data.rarity}`}
+          className={`pick picked ${data.rarity} disabled`}
           onClick={() => {
             if (showModal) {
               addChoice(data);

@@ -3,17 +3,10 @@ export interface BingoEvent {
   index: number;
   value: string;
   rarity: string;
-  occured: boolean;
+  occurred: boolean;
 }
 
 export interface User {
-  _id: string;
-  username: string;
-  email: string;
-  choices: string[];
-}
-
-export interface MockUser {
   _id: string;
   username: string;
   email: string;

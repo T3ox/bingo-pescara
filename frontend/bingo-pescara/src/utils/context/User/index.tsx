@@ -15,63 +15,63 @@ export const UserProvider = ({ children }: Props) => {
       rarity: 'UNCOMMON',
       index: 1,
       _id: '',
-      occured: false,
+      occurred: false,
     },
     {
       value: '',
       rarity: 'COMMON',
       index: 2,
       _id: '',
-      occured: false,
+      occurred: false,
     },
     {
       value: '',
       rarity: 'RARE',
       index: 3,
       _id: '',
-      occured: false,
+      occurred: false,
     },
     {
       value: '',
       rarity: 'EPIC',
       index: 4,
       _id: '',
-      occured: false,
+      occurred: false,
     },
     {
       value: '',
       rarity: 'LEGENDARY',
       index: 5,
       _id: '',
-      occured: false,
+      occurred: false,
     },
     {
       value: '',
       rarity: '',
       index: 6,
       _id: '',
-      occured: false,
+      occurred: false,
     },
     {
       value: '',
       rarity: '',
       index: 7,
       _id: '',
-      occured: false,
+      occurred: false,
     },
     {
       value: '',
       rarity: '',
       index: 8,
       _id: '',
-      occured: false,
+      occurred: false,
     },
     {
       value: '',
       rarity: '',
       index: 9,
       _id: '',
-      occured: false,
+      occurred: false,
     },
   ]);
   const [showModal, setShowModal] = useState(false);
@@ -108,10 +108,11 @@ export const UserProvider = ({ children }: Props) => {
         _id: response._id ?? '',
         username: response.username,
         email: response.email,
-        choices: response.choices ?? [],
+        choices: response.choices,
       };
 
       setUser(userData);
+      setChoices(userData.choices);
       localStorage.setItem('user', JSON.stringify(userData));
 
       navigate('/my-profile');
@@ -128,11 +129,14 @@ export const UserProvider = ({ children }: Props) => {
       try {
         type RegisterResponse = User & { message?: string };
 
-        const response = await axios.post<RegisterResponse>('https://bingo-pescara.onrender.com/api/utenti', {
-          username,
-          email,
-          // password,
-        });
+        const response = await axios.post<RegisterResponse>(
+          'https://bingo-pescara.onrender.com/api/utenti',
+          {
+            username,
+            email,
+            // password,
+          }
+        );
 
         if (response.data.message) {
           console.warn('Registrazione fallita:', response.data.message);

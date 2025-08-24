@@ -37,6 +37,12 @@
   }
 }
 
+.disabled {
+  cursor: not-allowed !important;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
 .picked {
   border: 3px solid #2a2e7ea3;
   color: white;

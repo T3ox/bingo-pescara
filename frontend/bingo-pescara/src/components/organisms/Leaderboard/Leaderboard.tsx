@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import getUsers from '../../../API/getUsers';
-import type { BingoEvent, MockUser } from '../../../utils/types';
+import type { BingoEvent, User } from '../../../utils/types';
 import LBUserRow from '../../molecues/LBUserRow/LBUserRow';
 import './styles.scss';
 
@@ -14,35 +14,57 @@ const calculatePoints = (choices: BingoEvent[]) => {
   };
 
   return choices.reduce((total, c) => {
-    if (c.occured) {
+    if (c.occurred) {
       return total + (rarityPoints[c.rarity.toLowerCase()] || 0);
     }
     return total;
   }, 0);
 };
 
+interface LBUser extends User {
+  rank: number;
+}
+
 const Leaderboard = () => {
-  const [users, setUsers] = useState<MockUser[]>([]);
-  const [choices, setChoices] = useState<BingoEvent[]>([]);
+  const [users, setUsers] = useState<LBUser[]>([]);
 
   useEffect(() => {
     const getData = async () => {
-      const data: MockUser[] = await getUsers();
+      const data: User[] = await getUsers();
+
+      // ordina per punti decrescenti
       const sorted = [...data].sort(
         (a, b) => calculatePoints(b.choices) - calculatePoints(a.choices)
       );
 
-      setUsers(sorted);
-      console.log('users', sorted);
+      // calcola i rank considerando i punti uguali
+      let lastPoints = -1;
+      let lastRank = 0;
+
+      const ranked = sorted.map((user, index) => {
+        const points = calculatePoints(user.choices);
+        let rank = index + 1;
+
+        if (points === lastPoints) {
+          rank = lastRank; // stesso punteggio = stesso rank
+        } else {
+          lastRank = rank;
+          lastPoints = points;
+        }
+
+        return { ...user, rank };
+      });
+
+      setUsers(ranked);
     };
 
     getData();
-  }, [choices]);
+  }, []);
 
   return (
     <div className="leaderboard">
-      {users.map((user, index) => (
-        <LBUserRow rank={index + 1} name={user.username} choices={user.choices} key={user._id} />
+      {users.map((user) => (
+        <LBUserRow rank={user.rank} name={user.username} choices={user.choices} key={user._id} />
       ))}
     </div>
   );

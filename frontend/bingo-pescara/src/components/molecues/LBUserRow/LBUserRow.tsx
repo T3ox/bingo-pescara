@@ -1,3 +1,4 @@
+import Circle from '../../atoms/Circle/Circle';
 import './styles.scss';
 import type Props from './types';
 
@@ -14,7 +15,7 @@ const LBUserRow: React.FC<Props> = ({ name, choices, rank }) => {
     let total = 0;
 
     choices.forEach((c) => {
-      if (c.occured) {
+      if (c.occurred) {
         total += rarityPoints[c.rarity.toLowerCase()] || 0;
       }
     });
@@ -22,16 +23,20 @@ const LBUserRow: React.FC<Props> = ({ name, choices, rank }) => {
     return total;
   };
 
+  const podiumClass = rank == 1 ? 'first' : rank == 2 ? 'second' : rank == 3 ? 'third' : '';
+
   return (
     <>
-      <div className="user-row d-flex justify-content-between align-items-center">
+      <div className={`user-row d-flex justify-content-between align-items-center ${podiumClass}`}>
         <div className="user-row_first d-flex">
           <span>{rank}</span>
           <span>{name}</span>
         </div>
         <div className="choices d-flex flex-row-reverse">
           {choices.map((c, index) => (
-            <div className={`circle ${c.occured ? 'occured' : ''}`} key={index}></div>
+            <>
+              <Circle {...c} key={index} />
+            </>
           ))}
         </div>
 

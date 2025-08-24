@@ -1,9 +1,9 @@
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 import { MongoClient } from 'mongodb';
 
-import utentiRoutes from './routes/ApiUtente.js';
 import scelteRoutes from './routes/ApiScelte.js';
+import utentiRoutes from './routes/ApiUtente.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -12,7 +12,7 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: '*',
@@ -30,7 +30,6 @@ app.use((req, res, next) => {
 // Routes
 app.use('/api', utentiRoutes);
 app.use('/api', scelteRoutes);
-
 
 // Connect to DB and start server
 const PORT = process.env.PORT || 3000;
